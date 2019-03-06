@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:56:40 by jritchie          #+#    #+#             */
-/*   Updated: 2019/03/06 14:16:04 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/06 15:24:09 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 
 typedef struct	a_stack
 {
-	int		a;
+	int					a;
 	struct	a_stack 	*next;
 	struct	a_stack 	*prev;
 }				t_stacka;
 
 typedef struct	b_stack
 {
-	int		b;
+	int				b;
 	struct b_stack	*next;
 	struct b_stack	*prev;
 }				t_stackb;

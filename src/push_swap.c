@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/06 14:32:51 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/06 15:21:34 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,17 @@ int main(int ac, char **av)
 			j++;
 		}
 		sa->a = ft_atoi(av[i]);
-		sa = ft_listadd(sa);
+		if (i != ac - 1)
+			sa = ft_listadd(sa);
 		i++;
 	}
-	// duplicates(sa);
-	printf("%d", sa->a);
+	duplicates(sa);
 	// ft_check(sa);
-	// while (sa->prev)
+	// while (sa != NULL)
 	// {
+	// 	printf("%d", sa->a);
+	// 	printf("\n");
 	// 	sa = sa->prev;
 	// }
-	while (sa->next)
-	{
-		printf("%d", sa->a);
-		printf("\n");
-		sa = sa->next;
-	}
 	return (0);
 }

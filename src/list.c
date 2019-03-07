@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 10:35:09 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/06 11:01:31 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/07 17:04:38 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ t_stacka	*ft_listnew(void)
 	t_stacka *new;
 
 	if (!(new = (t_stacka *)malloc(sizeof(t_stacka))))
+		ft_error();
+	// if (!(new->array = (char **)malloc(sizeof(char *) * 5)))
+	// 	ft_error();
+	// if (!(new->array[0] = ft_strnew(0)))
+		// ft_error();
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+t_stackb	*ft_listnewb(void)
+{
+	t_stackb *new;
+
+	if (!(new = (t_stackb *)malloc(sizeof(t_stackb))))
 		ft_error();
 	// if (!(new->array = (char **)malloc(sizeof(char *) * 5)))
 	// 	ft_error();

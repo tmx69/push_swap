@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:56:40 by jritchie          #+#    #+#             */
-/*   Updated: 2019/03/06 15:24:09 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:50:55 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,16 @@ void 	ft_error();
 t_stacka	*ft_listnew(void);
 t_stacka *ft_listadd(t_stacka *trt);
 void    ft_check(t_stacka  *sa);
+void    ft_rrr(t_stackb	*sb, t_stacka   *sa);
+void    ft_rrb(t_stackb	*sb);
+void    ft_rra(t_stacka	*sa);
+void    ft_rr(t_stackb *sb, t_stacka *sa);
+void    ft_turn_rb(t_stackb	*sb);
+void    ft_turn_ra(t_stacka	*sa);
+void	ft_pb(t_stacka	*sa, t_stackb	*sb);
+void	ft_pa(t_stacka	*sa, t_stackb	*sb);
+void	ft_ss(t_stacka	*sa, t_stackb	*sb);
+void	ft_sb(t_stackb	*sb);
+void	ft_sa(t_stacka	*sa);
+t_stackb	*ft_listnewb(void);
 #endif

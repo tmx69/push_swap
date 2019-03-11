@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 10:35:09 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/07 17:04:38 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/11 11:16:26 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_stacka	*ft_listnew(void)
 	new->prev = NULL;
 	return (new);
 }
+
 t_stackb	*ft_listnewb(void)
 {
 	t_stackb *new;
@@ -41,6 +42,21 @@ t_stackb	*ft_listnewb(void)
 		// ft_error();
 	new->next = NULL;
 	new->prev = NULL;
+	return (new);
+}
+
+t_stackb *ft_listadd_b(t_stackb *trt)
+{
+	t_stackb *buf;
+	t_stackb *new;
+
+	new = ft_listnewb();
+	buf = trt;
+	while (buf->next != NULL)
+		buf = buf->next;
+	buf->next = new;
+	new->next = NULL;
+	new->prev = buf;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/06 15:21:34 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/11 15:34:06 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ void ft_error()
 
 void	duplicates(t_stacka *sa)
 {
+	int i;
+	t_stacka *end;
+	i = sa->a;
 	while (sa->prev)
 	{
-		if (sa->a == sa->prev->a)
-			ft_error();
+		end = sa;
+		while (end->prev)
+		{
+			if (sa->a == end->prev->a)
+				ft_error();
+			end = end->prev;
+		}
 		sa = sa->prev;
 	}
 }
@@ -34,12 +42,14 @@ void	duplicates(t_stacka *sa)
 int main(int ac, char **av)
 {
 	t_stacka	*sa;
+	t_stacka	*head;
 	int 		i;
 	int 		j;
 
 	i = 1;
 	sa = ft_listnew();
 	j = 0;
+	head = sa;
 	while (av[i])
 	{
 		j = 0;
@@ -62,6 +72,7 @@ int main(int ac, char **av)
 		i++;
 	}
 	duplicates(sa);
+	srot(head);
 	// ft_check(sa);
 	// while (sa != NULL)
 	// {

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:48:17 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/07 15:05:00 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/11 16:44:15 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_ss(t_stacka	*sa, t_stackb	*sb)
 
 void	ft_pa(t_stacka	*sa, t_stackb	*sb)
 {
+    sa = ft_listadd_a(sa);
     sa->a = sb->b;
 }
 

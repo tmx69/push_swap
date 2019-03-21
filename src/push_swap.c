@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/11 15:34:06 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/18 12:34:03 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,35 @@ void ft_error()
 	exit(0);
 }
 
-void	duplicates(t_stacka *sa)
+void	duplicates(t_stack *a)
 {
 	int i;
-	t_stacka *end;
-	i = sa->a;
-	while (sa->prev)
+	t_stack *end;
+	i = a->value;
+	while (a->prev)
 	{
-		end = sa;
+		end = a;
 		while (end->prev)
 		{
-			if (sa->a == end->prev->a)
+			if (a->value == end->prev->value)
 				ft_error();
 			end = end->prev;
 		}
-		sa = sa->prev;
+		a = a->prev;
 	}
 }
 
 int main(int ac, char **av)
 {
-	t_stacka	*sa;
-	t_stacka	*head;
-	int 		i;
-	int 		j;
+	t_stack	*a;
+	t_stack	*head;
+	int		i;
+	int		j;
 
 	i = 1;
-	sa = ft_listnew();
+	a = ft_listnew();
 	j = 0;
-	head = sa;
+	head = a;
 	while (av[i])
 	{
 		j = 0;
@@ -66,19 +66,19 @@ int main(int ac, char **av)
 			}
 			j++;
 		}
-		sa->a = ft_atoi(av[i]);
+		a->value = ft_atoi(av[i]);
 		if (i != ac - 1)
-			sa = ft_listadd(sa);
+			a = ft_listadd(a);
 		i++;
 	}
-	duplicates(sa);
+	duplicates(a);
 	srot(head);
-	// ft_check(sa);
-	// while (sa != NULL)
+	// ft_check(a);
+	// while (a != NULL)
 	// {
-	// 	printf("%d", sa->a);
+	// 	printf("%d", a->a);
 	// 	printf("\n");
-	// 	sa = sa->prev;
+	// 	a = a->prev;
 	// }
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:26:36 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/21 18:07:29 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/22 19:51:18 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,68 +49,50 @@ void    ft_check(t_stack  *sa)
 
 }
 
-void	ft_oper_check(char *arr, t_stack	*sa)
+void	ft_oper_check(char *arr, t_stack *a, t_stack **b)
 {
-	int i;
-	char *s;
-	int j;
 
-	j = 0;
-	t_stack	*sb;
-	i = 0;
-	sb = ft_listnew();
-	s = (char*)malloc(sizeof(char) * 10);
-	// while(arr[i])
-	// {
 			if (ft_strcmp(arr, "sa") ==  0)
-				ft_sa(sa);
-			else if(ft_strcmp(arr, "sb") == 0)
-				ft_sb(sb);
+				ft_sa(a);
+			else if(ft_strcmp(arr, "b") == 0)
+				ft_sb(*b);
 			else if(ft_strcmp(arr, "ss") == 0)
-				ft_ss(sa, sb);
+				ft_ss(a, *b);
 			else if(ft_strcmp(arr, "pa") == 0)
-				ft_pa(sa, &sb);
+			{
+				ft_pa(&a, b);
+				*b = del((*b)->value, b);
+			}
 			else if(ft_strcmp(arr, "pb") == 0)
-				ft_pb(sa, sb);
+			{
+				ft_pb(&a, b);
+				a = del(a->value, &a);
+			}
 			else if(ft_strcmp(arr, "ra") == 0)
-				ft_turn_ra(sa);
+				ft_turn_ra(a);
 			else if(ft_strcmp(arr, "rb") == 0)
-				ft_turn_rb(sb);
+				ft_turn_rb(*b);
 			else if(ft_strcmp(arr, "rr") == 0)
-				ft_rr(sb, sa);
+				ft_rr(*b, a);
 			else if(ft_strcmp(arr, "rra") == 0)
-				ft_rra(sa);
+				ft_rra(a);
 			else if(ft_strcmp(arr, "rrb") == 0)
-				ft_rrb(sb);
+				ft_rrb(*b);
 			else if(ft_strcmp(arr, "rrr") == 0)
-				ft_rrr(sb,sa);
+				ft_rrr(*b,a);
 			else
 				ft_error();
-		// i++;
-	// }
-	// ft_check(sa);
-	// while (sa->prev != NULL)
-    // {
-    // 	sa = sa->prev;
-    // }
-	// while (sa != NULL)
-	// {
-	// 	printf("%d", sa->value);
-	// 	// printf("\n");
-	// 	sa = sa->next;
-	// }
 
 }
 void ft_read(t_stack	*sa)
 {
 	char	*t;
-	int 	i;
-	char	**array;
+	char	*array;
 	int		fd;
 	int		ret;
 	char	temp[10000];
-	i = 0;
-	array = (char**)malloc(sizeof(char*) * 10);
+
+	array = (char*)malloc(sizeof(char) * 10);
 	// array = (char*)malloc(sizeof(char) * 10000);
 	// array[0] = 'r';
 	// array[1] = 'r';
@@ -129,33 +111,43 @@ void ft_read(t_stack	*sa)
 	// array[14] = 'p';
 	// array[15] = 'a';
 	// array[16] = '\n';
+	// array[17] = 'p';
+	// array[18] = 'a';
+	// array[19] = '\n';
+	// array[20] = 'p';
+	// array[21] = 'a';
+	// array[22] = '\n';
+	// array[23] = 'p';
+	// array[24] = 'a';
+	// array[25] = '\n';
+	// array[6] = 'p';
+	// array[7] = 'a';
+	// array[8] = '\n';
+	// array[9] = 'p';
+	// array[10] = 'a';
+	// array[11] = '\n';
+	// array[12] = 'p';
+	// array[13] = 'b';
+	// array[14] = '\n';
+	// array[12] = 'p';
+	// array[13] = 'a';
+	// array[14] = '\n';
+	// array[15] = 'p';
+	// array[16] = 'a';
+	// array[17] = '\n';
+	// array[18] = 'p';
+	// array[19] = 'a';
+	// array[20] = '\n';
 	fd =  open(0, O_RDONLY);
 	while ((ret = read(0, temp, 10000)) > 0)
 	{
-		t = *array;
+		t = array;
 		temp[ret] = '\0';
-		array[i] = ft_strjoin(*array, temp);
-		// array = ft_strjoin(array, "\n");
-		i++;
+		array = ft_strjoin(array, temp);
+		array = ft_strjoin(array, "\n");
 		free(t);
 	}
-	while (*array[i])
-{
-	printf("%s", array[i]);
-	i--;
-}
-	// while (sa->prev != NULL)
-    // {
-    // 	sa = sa->prev;
-    // }
-	// while (sa != NULL)
-	// {
-	// 	printf("%d", sa->value);
-	// 	// printf("\n");
-	// 	sa = sa->next;
-	// }
-	// ft_oper_check(array, sa);
-	// printf("%s", array);
+	ft_search(array, sa);
 }
 int main(int ac, char **av)
 {

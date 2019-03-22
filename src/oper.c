@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:48:17 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/21 16:30:15 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/22 19:18:49 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ void	ft_sa(t_stack	*a)
 {
     int i;
 
+    while (a->prev != NULL)
+     {
+     	a = a->prev;
+    }
     i = a->value;
-    a->value = a->next->value;
-    a->next->value = i;
+    if (a->next != NULL)
+    {
+        a->value = a->next->value;
+        a->next->value = i;
+    }
 }
 
 void	ft_sb(t_stack	*sb)
@@ -40,20 +47,45 @@ void	ft_ss(t_stack	*sa, t_stack	*sb)
 
 }
 
-void	ft_pa(t_stack *a, t_stack **b)
+t_stack	*ft_add_start(t_stack *trt)
+{
+	t_stack *buf;
+	t_stack *new;
+
+	new = ft_listnew();
+	buf = trt;
+	while (buf->prev != NULL)
+		buf = buf->prev;
+	buf->prev = new;
+	new->next = buf;
+	new->prev = NULL;
+	return (new);
+}
+
+void	ft_pa(t_stack **a, t_stack **b)
 {
     t_stack *pn;
-
-    a = ft_listadd_start(a);
-    a->value = (*b)->value;
-    //  pn = (*b);
+	t_stack *tmp;
+    if (b)
+    {
+        while ((*b)->prev != NULL)
+        {
+			(*b) = (*b)->prev;
+		}
+		// tmp = ft_listnew();
+		// tmp->value = (*b)->value;
+		(*a) = ft_listadd_start(*a);
+		(*a)->value = (*b)->value;
+	}
     // (*b) = del((*b)->value, (*b));
-    //  if (pn->next == NULL)
+    // pn = (*b);
+    // // (*b) = del((*b)->value, (*b));
+    // if (pn->next == NULL)
     //  {
     //     // printf("PAPAPAP:%d\n",(*b)->value);
-    //     // free((*b));
-    //     // (*b) = pn->next;
-    //     // (*b)->prev = NULL;
+    //     free((*b));
+    //     (*b) = pn->next;
+    //     (*b)->prev = NULL;
 
     //  }
     //  else
@@ -68,10 +100,52 @@ void	ft_pa(t_stack *a, t_stack **b)
 
 }
 
-void	ft_pb(t_stack	*sa, t_stack	*sb)
+void	ft_pb(t_stack	**a, t_stack	**b)
 {
+    // t_stack *pn;
+    // while ((*a)->prev != NULL)
+    // {
+    //     (*a) = (*a)->prev;
+    // }
+    if (!(*b))
+    {
+        (*b) = ft_listnew();
+    }
+	else
+	{
+		(*b) = ft_listadd_start((*b));
+	}
 
-    sa->value = sb->value;
+    // else if (b->value != 0)
+    // {
+    //     b = ft_listadd_start(b);
+    // }
+	// // if (*a || a)
+    // 	b->value = (*a)->value;
+	if (a)
+	{
+		while ((*a)->prev != NULL)
+        {
+			(*a) = (*a)->prev;
+		}
+		(*b)->value = (*a)->value;
+	}
+	// pn = (*a);
+    // if (pn->next == NULL)
+    // {
+    //     free((*a));
+    //     // (*a)->next = NULL;
+	//     (*a) = NULL;
+    //     // (*a)->value = 11;
+    //     // printf("%d",(*a)->value);
+    // }
+    // else
+    // {
+
+    //     (*a) = pn->next;
+    //     (*a)->prev = NULL;
+    //     free(pn);
+    // }
 }
 
 void    ft_turn_ra(t_stack	*sa)

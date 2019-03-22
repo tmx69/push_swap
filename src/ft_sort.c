@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:41:47 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/21 15:30:43 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/22 19:46:58 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,32 @@
 #include "../includes/ft_push_swap.h"
 #include "../libft/libft.h"
 
-t_stack	 *del(int i, t_stack *head)
+t_stack	 *del(int i, t_stack **head)
 {
     t_stack *pn;
 	t_stack *tail;
 	t_stack *temp;
-    pn = head;
+    // while (head->prev != NULL)
+    // {
+    //     head = head->prev;
+    // }
+    pn = *head;
     while (pn != NULL)
     {
-        if (pn->prev == NULL && pn->next== NULL)
+        if (pn->prev == NULL && pn->next== NULL) // если запись единственная
         {
-            head = NULL;
+            (*head) = NULL;
             free(pn);
             break ;
         }
         if (pn->value == i) // если найдена заданная страна
         {
-            if (pn == head) // если найденная запись - первая
+            if (pn == *head) // если найденная запись - первая
             {
-                head = pn->next;
-                head->prev = NULL;
+                (*head) = pn->next;
+                (*head)->prev = NULL;
 				free(pn);
-				pn = head->next;
+				pn = (*head)->next;
             }
        		else if (pn->next == NULL) // если найденная запись - последняя
                 {
@@ -46,18 +50,21 @@ t_stack	 *del(int i, t_stack *head)
                 }
             else  // удаление из средины списка
             {
-                    pn->next->prev=pn->prev;
-                    pn->prev->next=pn->next;
+                    pn->next->prev = pn->prev;
+                    pn->prev->next = pn->next;
                     temp = pn;
                     pn=pn->next;
                     free(temp);
                 }
-    	}
-    else // если заданная страна не найдена – продвигаемся по списку
-		pn=pn->next;
+        }
+        else // если заданная страна не найдена – продвигаемся по списку
+		    pn=pn->next;
 	}
-	return (head);
+    // if (head == NULL)
+    //     return (NULL);
+	return (*head);
 }
+
 
 void  srot(t_stack *as)
 {
@@ -70,21 +77,19 @@ void  srot(t_stack *as)
     i = as->value;
     j = as->value;
     b = ft_listnew();
-	// a = as;
-    while (a != NULL) //max and min
+
+    while (a != NULL)
     {
         if (a->value < i)
             i = a->value;
         else if (a->value > j)
             j = a->value;
-        // else
-        //     c = a->value;
         a = a->next;
     }
 	a = as;
     while (a != NULL)
     {
-        if (a->value != i && a->value != j)// && a->value != c)
+        if (a->value != i && a->value != j)
     	{
             if (b->value != 0)
 			{
@@ -97,8 +102,8 @@ void  srot(t_stack *as)
 	a = as;
 	while (a != NULL)
 	{
-		if (a->value != i && a->value != j)// && a->value != c)
-			as = del(a->value, as);
+		if (a->value != i && a->value != j)
+			as = del(a->value, &as);
 		a = a->next;
 	}
 	sort_a(as, b, i, j);
@@ -109,8 +114,8 @@ void	sort_a(t_stack *a, t_stack *b, int min, int max)
 {
 	t_stack *last;
     t_stack *start;
-int i = 0;
-int flag;
+    int i = 0;
+    int flag;
 
 flag = 0;
 	while (b->prev != NULL)
@@ -133,10 +138,10 @@ flag = 0;
     	if (b->value < a->value && b->value > last->value)
         {
 			printf("FT_PA\n");
-			ft_pa(a, &b);
+			ft_pa(&a, &b);
             i++;
-			b = del(b->value, b);
-			a = a->prev;
+			b = del(b->value, &b);
+			// a = a->prev;
         }
         else if (b->value < a->value && b->value < last->value)
         {

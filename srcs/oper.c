@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:48:17 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/22 19:18:49 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:33:59 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_sa(t_stack	*a)
     int i;
 
     while (a->prev != NULL)
-     {
-     	a = a->prev;
+    {
+        a = a->prev;
     }
     i = a->value;
     if (a->next != NULL)
@@ -34,10 +34,12 @@ void	ft_sa(t_stack	*a)
 void	ft_sb(t_stack	*sb)
 {
     int i;
-
-    i = sb->value;
-    sb->value = sb->next->value;
-    sb->next->value = i;
+    if (sb)
+    {
+        i = sb->value;
+        sb->value = sb->next->value;
+        sb->next->value = i;
+    }
 }
 
 void	ft_ss(t_stack	*sa, t_stack	*sb)
@@ -64,49 +66,19 @@ t_stack	*ft_add_start(t_stack *trt)
 
 void	ft_pa(t_stack **a, t_stack **b)
 {
-    t_stack *pn;
-	t_stack *tmp;
     if (b)
     {
         while ((*b)->prev != NULL)
         {
 			(*b) = (*b)->prev;
 		}
-		// tmp = ft_listnew();
-		// tmp->value = (*b)->value;
 		(*a) = ft_listadd_start(*a);
 		(*a)->value = (*b)->value;
 	}
-    // (*b) = del((*b)->value, (*b));
-    // pn = (*b);
-    // // (*b) = del((*b)->value, (*b));
-    // if (pn->next == NULL)
-    //  {
-    //     // printf("PAPAPAP:%d\n",(*b)->value);
-    //     free((*b));
-    //     (*b) = pn->next;
-    //     (*b)->prev = NULL;
-
-    //  }
-    //  else
-    //  {
-    //     (*b) = pn->next;
-    //     (*b)->prev = NULL;
-    //     free(pn);
-    //  }
-
-
-    // pn = b->next;
-
 }
 
 void	ft_pb(t_stack	**a, t_stack	**b)
 {
-    // t_stack *pn;
-    // while ((*a)->prev != NULL)
-    // {
-    //     (*a) = (*a)->prev;
-    // }
     if (!(*b))
     {
         (*b) = ft_listnew();
@@ -115,13 +87,6 @@ void	ft_pb(t_stack	**a, t_stack	**b)
 	{
 		(*b) = ft_listadd_start((*b));
 	}
-
-    // else if (b->value != 0)
-    // {
-    //     b = ft_listadd_start(b);
-    // }
-	// // if (*a || a)
-    // 	b->value = (*a)->value;
 	if (a)
 	{
 		while ((*a)->prev != NULL)
@@ -130,29 +95,28 @@ void	ft_pb(t_stack	**a, t_stack	**b)
 		}
 		(*b)->value = (*a)->value;
 	}
-	// pn = (*a);
-    // if (pn->next == NULL)
-    // {
-    //     free((*a));
-    //     // (*a)->next = NULL;
-	//     (*a) = NULL;
-    //     // (*a)->value = 11;
-    //     // printf("%d",(*a)->value);
-    // }
-    // else
-    // {
-
-    //     (*a) = pn->next;
-    //     (*a)->prev = NULL;
-    //     free(pn);
-    // }
 }
 
+// void    ft_turn_ra(t_stack	*sa)
+// {
+//     int i;
+
+// 	i = sa->value;
+//     while (sa->next != NULL)
+//     {
+//     	sa->value = sa->next->value;
+//         sa->next->value = i;
+//         sa = sa->next;
+// 	}
+// }
 void    ft_turn_ra(t_stack	*sa)
 {
     int i;
 
-	i = sa->value;
+
+    while (sa->prev != NULL)
+        sa = sa->prev;
+    i = sa->value;
     while (sa->next != NULL)
     {
     	sa->value = sa->next->value;
@@ -165,12 +129,15 @@ void    ft_turn_rb(t_stack	*sb)
 {
 	int	j;
 
-	j = sb->value;
-    while (sb->next != NULL)
+    if (sb)
     {
-        sb->value = sb->next->value;
-        sb->next->value = j;
-    	sb = sb->next;
+	    j = sb->value;
+        while (sb->next != NULL)
+        {
+            sb->value = sb->next->value;
+            sb->next->value = j;
+            sb = sb->next;
+        }
     }
 }
 
@@ -201,21 +168,25 @@ void    ft_rrb(t_stack	*sb)
 {
 	int i;
 
-	while (sb->next != NULL)
+    if (sb)
     {
-        sb = sb->next;
-    }
-	i = sb->value;
-	while (sb->prev != NULL)
-    {
-        sb->value = sb->prev->value;
-        sb->prev->value = i;
-    	sb = sb->prev;
+    	while (sb->next != NULL)
+        {
+            sb = sb->next;
+        }
+        i = sb->value;
+        while (sb->prev != NULL)
+        {
+            sb->value = sb->prev->value;
+            sb->prev->value = i;
+            sb = sb->prev;
+        }
     }
 }
 
 void    ft_rrr(t_stack	*sb, t_stack   *sa)
 {
+    write(1, "rrr\n", 4);
     ft_rrb(sb);
     ft_rra(sa);
 }

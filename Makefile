@@ -10,43 +10,35 @@
 #                                                                              #
 # **************************************************************************** #
 
-C = clang
-NAME = libftprintf.a
-FLAGS = -Wall -Wextra -Werror -O2
-LIBFT = libft
-DIR_S = srcs
-DIR_O = obj
-HEADER = includes
-SURCES = ft_printf.c \
-ft_parsing_di.c \
-ft_parsing_o.c \
-ft_parsing_s.c \
-ft_parsing_x.c \
-ft_parsing_spec.c \
-ft_parsing_pcper.c \
-ft_parsing_u.c \
-ft_parsing_f.c \
-ft_float.c \
-ft_floathash.c \
-cast.c \
 
-SRCS = $(addprefix $(DIR_S)/,$(SURCES))
-OBJS = $(addprefix $(DIR_O)/,$(SURCES:.c=.o))
+NAME = push_swap
+
+OBJ = $(patsubst %.c,%.o,$(SRC))
+
+SRC = srcs/push_swap.c \
+srcs/oper.c \
+srcs/list.c \
+srcs/ft_sort.c \
+srcs/list2.c \
+
+FLAGS = -Wall -Wextra -Werror
+
 all: $(NAME)
-$(NAME): $(OBJS)
-		@make -C $(LIBFT)
-		@cp libft/libft.a ./$(NAME)
-		@ar rc $(NAME) $(OBJS)
-		@ranlib $(NAME)
-$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)/ft_printf.h
-	@mkdir -p obj
-	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+
+$(NAME): $(OBJ)
+	make -C libft
+	# gcc -g $(FLAGS) -o $(NAME) $^ -L libft -lft -I ./includes -I ./libft
+	gcc srcs/push_swap.c srcs/oper.c srcs/list.c  srcs/ft_sort.c srcs/list2.c -o push_swap libft/libft.a
+	gcc srcs/checker.c srcs/checker2.c srcs/oper.c srcs/list.c srcs/list2.c  -o checker libft/libft.a
+%.o: %.c
+	gcc $(FLAGS) -c $^ -o $@ -I includes
+
 clean:
-	@rm -f $(OBJS)
-	@rm -rf $(DIR_O)
-	@make clean -C $(LIBFT)
+	make clean -C ./libft
+	rm -f $(OBJ)
+
 fclean: clean
-	@rm -f $(NAME)
-	@make fclean -C $(LIBFT)
+	make fclean -C ./libft
+	rm -f $(NAME)
+
 re: fclean all
-.PHONY: fclean re norme all clean

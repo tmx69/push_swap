@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 16:40:24 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/18 13:56:49 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 14:49:14 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,54 @@
 #include "../includes/ft_push_swap.h"
 #include "../libft/libft.h"
 
-void		del2(t_stack **head, t_stack **pn)
+void	del2(t_stack **head, t_stack **pn)
 {
-    t_stack *tail;
+	t_stack *tail;
 	t_stack *temp;
-  if (*pn == *head) // если найденная запись - первая
-            {
-                (*head) = (*pn)->next;
-                (*head)->prev = NULL;
-				free((*pn));
-				(*pn) = (*head)->next;
-            }
-       		else if ((*pn)->next == NULL) // если найденная запись - последняя
-                {
-                    tail = (*pn)->prev;
-                    tail->next = NULL;
-                    free((*pn));
-                    (*pn) = tail;
-                }
-            else  // удаление из средины списка
-            {
-                    (*pn)->next->prev = (*pn)->prev;
-                    (*pn)->prev->next = (*pn)->next;
-                    temp = (*pn);
-                    (*pn) = (*pn)->next;
-                    free(temp);
-                }
+
+	if (*pn == *head)
+	{
+		(*head) = (*pn)->next;
+		(*head)->prev = NULL;
+		free((*pn));
+		(*pn) = (*head)->next;
+	}
+	else if ((*pn)->next == NULL)
+	{
+		tail = (*pn)->prev;
+		tail->next = NULL;
+		free((*pn));
+		(*pn) = tail;
+	}
+	else
+	{
+		(*pn)->next->prev = (*pn)->prev;
+		(*pn)->prev->next = (*pn)->next;
+		temp = (*pn);
+		(*pn) = (*pn)->next;
+		free(temp);
+	}
 }
 
-t_stack	 *del(int i, t_stack **head)
+t_stack	*del(int i, t_stack **head)
 {
-    t_stack *pn;
+	t_stack *pn;
 
-    pn = *head;
-    while (pn != NULL)
-    {
-        if (pn->prev == NULL && pn->next == NULL)
-        {
-            (*head) = NULL;
-            free(pn);
-            break ;
-        }
-        if (pn->value == i)
-        {
-          del2(head, &pn);
-        }
-        else
-		    pn=pn->next;
+	pn = *head;
+	while (pn != NULL)
+	{
+		if (pn->prev == NULL && pn->next == NULL)
+		{
+			(*head) = NULL;
+			free(pn);
+			break ;
+		}
+		if (pn->value == i)
+		{
+			del2(head, &pn);
+		}
+		else
+			pn = pn->next;
 	}
 	return (*head);
 }
@@ -111,53 +112,3 @@ void	str_arg(t_stack *a, char *av)
 		av[j] == 45 ? minus = 1 : 0;
 	}
 }
-// t_stack	 *del(int i, t_stack **head)
-// {
-//     t_stack *pn;
-// 	t_stack *tail;
-// 	t_stack *temp;
-//     // while (head->prev != NULL)
-//     // {
-//     //     head = head->prev;
-//     // }
-//     pn = *head;
-//     while (pn != NULL)
-//     {
-//         if (pn->prev == NULL && pn->next== NULL) // если запись единственная
-//         {
-//             (*head) = NULL;
-//             free(pn);
-//             break ;
-//         }
-//         if (pn->value == i) // если найдена заданная страна
-//         {
-//             if (pn == *head) // если найденная запись - первая
-//             {
-//                 (*head) = pn->next;
-//                 (*head)->prev = NULL;
-// 				free(pn);
-// 				pn = (*head)->next;
-//             }
-//        		else if (pn->next == NULL) // если найденная запись - последняя
-//                 {
-//                     tail = pn->prev;
-//                     tail->next = NULL;
-//                     free(pn);
-//                     pn = tail;
-//                 }
-//             else  // удаление из средины списка
-//             {
-//                     pn->next->prev = pn->prev;
-//                     pn->prev->next = pn->next;
-//                     temp = pn;
-//                     pn=pn->next;
-//                     free(temp);
-//                 }
-//         }
-//         else // если заданная страна не найдена – продвигаемся по списку
-// 		    pn=pn->next;
-// 	}
-//     // if (head == NULL)
-//     //     return (NULL);
-// 	return (*head);
-// }

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:56:40 by jritchie          #+#    #+#             */
-/*   Updated: 2019/03/29 13:57:40 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/01 17:32:58 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef struct		stack
 
 typedef struct		buf
 {
+	int				fra;
+	int				frb;
+	int				srb;
+	int				sra;
 	int				mina;
 	int				maxa;
 	int				maxb;
@@ -70,6 +74,7 @@ void			str_check(char *av);
 int				ft_lst_check(t_stack *a);
 void			opeartion_check(char *arr, t_stack *a, t_stack **b);
 void			ft_order(t_stack *sa);
-void			find(t_stack *a, t_stack *b);
+void			find(t_stack *a, t_stack *b, t_buf *buf);
+void		 list_del(t_stack **alst);
 // void    ft_check2(t_stack  *sa);
 #endif

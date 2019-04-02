@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jritchie <jritchie@student.42.fr>          +#+  +:+       +#+         #
+#    By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/21 18:10:01 by jritchie          #+#    #+#              #
-#    Updated: 2019/02/25 17:17:02 by jritchie         ###   ########.fr        #
+#    Updated: 2019/04/02 14:53:41 by rywisozk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	make -C libft
 	# gcc -g $(FLAGS) -o $(NAME) $^ -L libft -lft -I ./includes -I ./libft
-	gcc srcs/push_swap.c srcs/oper.c srcs/list.c  srcs/ft_sort.c srcs/list2.c -o push_swap libft/libft.a
+	gcc srcs/push_swap.c srcs/oper.c srcs/oper2.c srcs/oper3.c srcs/list.c  srcs/ft_sort.c srcs/list2.c -o push_swap libft/libft.a
 	gcc srcs/checker.c srcs/checker2.c srcs/oper.c srcs/list.c srcs/list2.c  -o checker libft/libft.a
 %.o: %.c
 	gcc $(FLAGS) -c $^ -o $@ -I includes

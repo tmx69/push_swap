@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/23 15:56:50 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 14:17:53 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,52 +49,6 @@ void	duplicates(t_stack *a)
 	if (a->prev == NULL)
 		exit(0);
 }
-
-// void	str_check(char *av)
-// {
-// 	int j;
-
-// 	j = 0;
-// 	while (av[j])
-// 	{
-// 		if (ft_isdigit(av[j]) == 0 && av[j] != ' ')
-// 		{
-// 			if (!(av[j] == 45 && av[j + 1] > 47
-// 				&& av[j + 1] < 58))
-// 				ft_error();
-// 		}
-// 		j++;
-// 	}
-// }
-
-// void	str_arg(t_stack *a, char *av)
-// {
-// 	int j;
-// 	int c;
-// 	int	minus;
-// 	int flagg;
-
-// 	minus = 0;
-// 	j = -1;
-// 	c = 0;
-// 	flagg = 0;
-// 	while (av[++j])
-// 	{
-// 		if (ft_isdigit(av[j]) == 1)
-// 		{
-// 			c = c * 10 + (av[j] - '0');
-// 			if ((av[j + 1] == ' ') || (av[j + 1] == '\0'))
-// 			{
-// 				flagg == 1 ? a = ft_listadd(a) : 0;
-// 				minus == 1 ? (c = c * -1) && minus-- : 0;
-// 				a->value = c;
-// 				c = 0;
-// 				flagg == 0 ? flagg++ : 0;
-// 			}
-// 		}
-// 		av[j] == 45 ? minus = 1 : 0;
-// 	}
-// }
 
 int	main(int ac, char **av)
 {

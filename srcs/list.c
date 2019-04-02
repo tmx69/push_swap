@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 10:35:09 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/27 14:33:26 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 14:51:38 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	ft_check(t_stack *sa)
 {
-	t_stack *help;
+	t_stack	*help;
 	while (sa->prev != NULL)
 	{
 		sa = sa->prev;
@@ -49,16 +49,12 @@ t_stack	*ft_listnew(void)
 
 	if (!(new = (t_stack *)malloc(sizeof(t_stack))))
 		ft_error();
-	// if (!(new->array = (char **)malloc(sizeof(char *) * 5)))
-	// 	ft_error();
-	// if (!(new->array[0] = ft_strnew(0)))
-		// ft_error();
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-t_stack *ft_listadd(t_stack *trt)
+t_stack	*ft_listadd(t_stack *trt)
 {
 	t_stack *buf;
 	t_stack *new;
@@ -86,4 +82,14 @@ t_stack	*ft_listadd_start(t_stack *trt)
 	new->next = buf;
 	new->prev = NULL;
 	return (new);
+}
+
+void	list_del(t_stack **alst)
+{
+	while (*alst)
+	{
+		free(*alst);
+		*alst = (*alst)->next;
+	}
+	*alst = NULL;
 }

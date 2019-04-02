@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cheker2.c                                          :+:      :+:    :+:   */
+/*   checker2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 10:33:03 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/23 15:50:37 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:54:24 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@
 
 void	duplicate(t_stack *a)
 {
-	int i;
 	t_stack *end;
-	i = a->value;
-	if (a->prev == NULL)
-		exit(0);
+
 	while (a->prev)
 	{
 		end = a;
@@ -40,12 +37,25 @@ void	duplicate(t_stack *a)
 		}
 		a = a->prev;
 	}
+	while (a->next)
+	{
+		end = a;
+		while (end->next)
+		{
+			a->value == end->next->value ? ft_error() : 0;
+			end = end->next;
+		}
+		a = a->next;
+	}
+	if (a->prev == NULL)
+		exit(0);
 }
 
 void	ft_search(char *arr, t_stack *a)
 {
 	char	**s;
 	int		i;
+	int		j;
 	t_stack	*b;
 	t_stack *help;
 
@@ -55,7 +65,10 @@ void	ft_search(char *arr, t_stack *a)
 	while (s[i])
 	{
 		ft_oper_check(s[i], a, &b);
-		printf("%s", s[i]);
+		j = 0;
+		// if (ft_strcmp(s[i], "pb") == 0)
+		// 	a = del(a->value, &a);
+		printf("%s ", s[i]);
 		help = a;
 		while (help->prev)
 			help = help->prev;

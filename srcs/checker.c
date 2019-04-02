@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:26:36 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/03/27 10:17:52 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:54:29 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ int	main(int ac, char **av)
 	// 	i != ac - 1 ? sa = ft_listadd(sa) : 0;
 	// 	i++;
 	// }
-
 	if (ac > 1)
 	{
 		while (av[i])

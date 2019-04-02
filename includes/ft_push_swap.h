@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:56:40 by jritchie          #+#    #+#             */
-/*   Updated: 2019/04/01 17:32:58 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:20:28 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct		buf
 	int				frb;
 	int				srb;
 	int				sra;
+	int				k;
+	int				i;
+	int				j;
 	int				mina;
 	int				maxa;
 	int				maxb;
@@ -75,6 +78,13 @@ int				ft_lst_check(t_stack *a);
 void			opeartion_check(char *arr, t_stack *a, t_stack **b);
 void			ft_order(t_stack *sa);
 void			find(t_stack *a, t_stack *b, t_buf *buf);
-void		 list_del(t_stack **alst);
+void			list_del(t_stack **alst);
+void			second_rbra(t_stack *a, t_stack *b, t_buf *buf);
+void			first_rbra(t_stack *a, t_stack *b, t_buf *buf);
+void			min_second_rbra(t_buf *buf, int *fir);
+void			min_first_rbra(t_buf *buf, int *fir);
+void			cpy_head(t_stack *head, t_buf *buf, int bi);
+void			cpy_head_rra(t_stack *head, t_buf *buf, int bi);
+t_buf			*min_max(t_buf *buf, t_stack *a);
 // void    ft_check2(t_stack  *sa);
 #endif

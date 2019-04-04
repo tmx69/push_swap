@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:08:52 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 17:28:59 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 17:05:02 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ void	cpy_head(t_stack *head, t_buf *buf, int bi)
 		last = head;
 		while (last->next != NULL)
 			last = last->next;
-		if (bi < head->value && bi  > last->value)
+		if (bi < head->value && bi > last->value)
 			break ;
 		buf->j++;
 		ft_turn_ra(head);
 	}
+	// free(last);
 }

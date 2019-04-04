@@ -6,17 +6,15 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:26:36 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 19:54:29 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:58:36 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "../includes/ft_push_swap.h"
 #include "../libft/libft.h"
 #include <stdio.h>
-
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/_types.h>
@@ -55,7 +53,7 @@ void	ft_oper_check(char *arr, t_stack *a, t_stack **b)
 		ft_turn_ra(a);
 	else if (ft_strcmp(arr, "ss") == 0)
 		ft_ss(a, *b);
-	else if (ft_strcmp(arr, "pa") == 0 )
+	else if (ft_strcmp(arr, "pa") == 0)
 	{
 		if ((*b) != NULL)
 		{
@@ -65,8 +63,10 @@ void	ft_oper_check(char *arr, t_stack *a, t_stack **b)
 	}
 	else if (ft_strcmp(arr, "pb") == 0)
 	{
-		ft_pb(&a, b);
-		a = del(a->value, &a);
+		if (a)
+		{
+			ft_pb(&a, b);
+		}
 	}
 	else
 	{
@@ -83,15 +83,13 @@ void	ft_read(t_stack *sa)
 	char	temp[10000];
 
 	duplicate(sa);
-	array = (char*)malloc(sizeof(char) * 10);
+	array = (char*)malloc(sizeof(char) * 100);
 	fd = open(0, O_RDONLY);
 	while ((ret = read(0, temp, 10000)) > 0)
 	{
-		t = array;
 		temp[ret] = '\0';
-		array = ft_strjoin(array, temp);
-		array = ft_strjoin(array, "\n");
-		free(t);
+		array = ft_strjoin_free_first(array, temp);
+		array = ft_strjoin_free_first(array, "\n");
 	}
 	ft_search(array, sa);
 }
@@ -104,24 +102,6 @@ int	main(int ac, char **av)
 
 	i = 1;
 	sa = ft_listnew();
-	// while (av[i])
-	// {
-	// 	j = 0;
-	// 	while (av[i][j])
-	// 	{
-	// 		if (ft_isdigit(av[i][j]) == 0)
-	// 		{
-	// 			if (!(av[i][j] == 45 && av[i][j + 1] > 47 &&
-	// 			av[i][j + 1] < 58 && j == 0))
-	// 				ft_error();
-	// 		}
-	// 		j++;
-	// 	}
-	// 	sa->value = ft_atoi(av[i]);
-	// 	printf("VLUED:%d", sa->value);
-	// 	i != ac - 1 ? sa = ft_listadd(sa) : 0;
-	// 	i++;
-	// }
 	if (ac > 1)
 	{
 		while (av[i])
@@ -133,5 +113,9 @@ int	main(int ac, char **av)
 		}
 	}
 	ft_read(sa);
+	while (sa->prev != NULL)
+		sa = sa->prev;
+	list_del(&sa);
+	free(sa);
 	return (0);
 }

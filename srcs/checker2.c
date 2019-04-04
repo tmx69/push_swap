@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 10:33:03 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 19:54:24 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:52:25 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,41 +57,31 @@ void	ft_search(char *arr, t_stack *a)
 	int		i;
 	int		j;
 	t_stack	*b;
-	t_stack *help;
 
 	b = NULL;
 	i = 0;
 	s = ft_strsplit(arr, '\n');
+	free(arr);
 	while (s[i])
 	{
+		if (!a && ft_strcmp(s[i], "pa") == 0 && b)
+			a = ft_listnew();
+		else if (a && ft_strcmp(s[i], "pa") == 0 && b)
+			a = ft_listadd_start(a);
 		ft_oper_check(s[i], a, &b);
-		j = 0;
-		// if (ft_strcmp(s[i], "pb") == 0)
-		// 	a = del(a->value, &a);
-		printf("%s ", s[i]);
-		help = a;
-		while (help->prev)
-			help = help->prev;
-		while(help != NULL)
+		if (a)
 		{
-			printf("|%d|", help->value );
-			help = help->next;
+			while (a->prev != NULL)
+				a = a->prev;
 		}
-		printf("\n");
+		ft_strcmp(s[i], "pb") == 0 && a ? a = del(a->value, &a) : 0;
 		i++;
 	}
-	if (b)
+	i = 0;
+	while (s[i])
 	{
-	help = b;
-	while (help->prev)
-			help = help->prev;
-	printf("___________");
-		while(help->next)
-		{
-			printf("|%d|", help->value );
-			help = help->next;
-		}
-		printf("\n");
+		ft_strdel(&s[i]);
+		i++;
 	}
-	ft_check(a);
+	b ? ft_error() : ft_check(a);
 }

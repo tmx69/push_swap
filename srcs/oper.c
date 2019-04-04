@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:48:17 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 14:25:17 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 14:55:55 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_pa(t_stack **a, t_stack **b)
 		{
 			(*b) = (*b)->prev;
 		}
-		(*a) = ft_listadd_start(*a);
 		(*a)->value = (*b)->value;
 	}
 }

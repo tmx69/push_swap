@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:41:47 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 19:51:05 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 20:26:39 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	srot(t_stack *a)
 	}
 	a = head;
 	sort_a(a, b, buf);
+	free(buf);
 }
 
 t_stack	*cpy_list(t_stack *a)
@@ -59,6 +60,8 @@ t_stack	*cpy_list(t_stack *a)
 	{
 		new = new->prev;
 	}
+	free(a);
+	a = NULL;
 	return (new);
 }
 
@@ -88,6 +91,8 @@ void	find_good_rra(t_stack *a, t_stack *b, t_buf *buf)
 	}
 	min_second_rbra(buf, fir);
 	free(fir);
+	list_del(&bi);
+	list_del(&head);
 }
 
 void	find(t_stack *a, t_stack *b, t_buf *buf)
@@ -125,14 +130,13 @@ void	sort_a(t_stack *a, t_stack *b, t_buf *buf)
 	head = a;
 	while (b)
 	{
-		printf("FB:%d", b->value);
 		find(a, b, buf);
 		find_good_rra(a, b, buf);
-		printf("SB:%d  ", b->value);
 		if ((buf->fra + buf->frb) < (buf->sra + buf->srb))
 			first_rbra(a, b, buf);
 		else
 			second_rbra(a, b, buf);
+		a = ft_listadd_start(a);
 		ft_pa(&a, &b);
 		write(1, "pa\n", 3);
 		b = del(b->value, &b);
@@ -142,5 +146,5 @@ void	sort_a(t_stack *a, t_stack *b, t_buf *buf)
 		write(1, "rra\n", 4);
 		ft_rra(a);
 	}
-	ft_check(a);
+	// ft_check(a);
 }

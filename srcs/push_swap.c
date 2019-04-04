@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 14:17:53 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 20:20:42 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ int	main(int ac, char **av)
 		}
 	}
 	duplicates(head);
+	alg(a);
 	srot(head);
+	while (a->prev != NULL)
+		a = a->prev;
+	list_del(&a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 10:35:09 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/02 19:58:57 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/04 21:27:30 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
 
 void	ft_check(t_stack *sa)
 {
-	t_stack	*help;
+	// t_stack	*help;
+
 	while (sa->prev != NULL)
 	{
 		sa = sa->prev;
 	}
-	help = sa;
-		while (help->prev)
-			help = help->prev;
-		while(help != NULL)
-		{
-			printf("|%d|", help->value );
-			help = help->next;
-		}
-		printf("\n");
+	// help = sa;
+	// while (help->prev)
+	// 	help = help->prev;
+	// while (help != NULL)
+	// {
+	// 	printf("|%d|", help->value);
+	// 	help = help->next;
+	// }
+	// printf("\n");
 	while (sa->next != NULL)
 	{
 		if (sa->value > sa->next->value)
@@ -41,6 +42,7 @@ void	ft_check(t_stack *sa)
 		sa = sa->next;
 	}
 	write(1, "ok", 2);
+	exit(0);
 }
 
 t_stack	*ft_listnew(void)
@@ -86,10 +88,15 @@ t_stack	*ft_listadd_start(t_stack *trt)
 
 void	list_del(t_stack **alst)
 {
-	while (*alst)
+	t_stack *tmp;
+	t_stack *swap;
+
+	tmp = *alst;
+	while (tmp)
 	{
-		free(*alst);
-		*alst = (*alst)->next;
+		swap = tmp->next;
+		free(tmp);
+		tmp = swap;
 	}
 	*alst = NULL;
 }

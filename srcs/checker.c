@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 17:26:36 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 18:58:36 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:50:04 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	ft_oper_check(char *arr, t_stack *a, t_stack **b)
 
 void	ft_read(t_stack *sa)
 {
-	char	*t;
 	char	*array;
 	int		fd;
 	int		ret;
@@ -98,7 +97,6 @@ int	main(int ac, char **av)
 {
 	t_stack	*sa;
 	int		i;
-	int		j;
 
 	i = 1;
 	sa = ft_listnew();
@@ -111,8 +109,8 @@ int	main(int ac, char **av)
 			i != ac - 1 ? sa = ft_listadd(sa) : 0;
 			i++;
 		}
+		ft_read(sa);
 	}
-	ft_read(sa);
 	while (sa->prev != NULL)
 		sa = sa->prev;
 	list_del(&sa);

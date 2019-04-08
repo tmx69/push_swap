@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 16:41:47 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 20:26:39 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 10:27:34 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,64 @@
 #include "../includes/ft_push_swap.h"
 #include "../libft/libft.h"
 
+// void	srot(t_stack *a)
+// {
+// 	t_stack		*b;
+// 	// t_stack		*head;
+// 	t_buf		*buf;
+
+// 	buf = (t_buf *)malloc(sizeof(t_buf));
+// 	b = NULL;
+// 	buf->i = 0;
+// 	// head = a;
+// 	buf = min_max(buf, head);
+// 	while (buf->i-- > 0)
+// 	{
+// 		if (head->value != buf->mina && head->value != buf->maxa)
+// 		{
+// 			ft_pb(&head, &b);
+// 			write(1, "pb\n", 3);
+// 			head = del(head->value, &head);
+// 		}
+// 		else
+// 		{
+// 			write(1, "ra\n", 3);
+// 			ft_turn_ra(head);
+// 		}
+// 	}
+// 	a = head;
+// 	sort_a(a, b, buf);
+// 	free(buf);
+// }
 void	srot(t_stack *a)
 {
 	t_stack		*b;
-	t_stack		*head;
+	// t_stack		*head;
 	t_buf		*buf;
 
 	buf = (t_buf *)malloc(sizeof(t_buf));
 	b = NULL;
 	buf->i = 0;
-	head = a;
-	buf = min_max(buf, head);
+	// head = a;
+	buf = min_max(buf, a);
 	while (buf->i-- > 0)
 	{
-		if (head->value != buf->mina && head->value != buf->maxa)
+		if (a->value != buf->mina && a->value != buf->maxa)
 		{
-			ft_pb(&head, &b);
+			ft_pb(&a, &b);
 			write(1, "pb\n", 3);
-			head = del(head->value, &head);
+			a = del(a->value, &a);
 		}
 		else
 		{
 			write(1, "ra\n", 3);
-			ft_turn_ra(head);
+			ft_turn_ra(a);
 		}
 	}
-	a = head;
+	// a = head;
 	sort_a(a, b, buf);
 	free(buf);
 }
-
 t_stack	*cpy_list(t_stack *a)
 {
 	t_stack *new;
@@ -91,7 +119,6 @@ void	find_good_rra(t_stack *a, t_stack *b, t_buf *buf)
 	}
 	min_second_rbra(buf, fir);
 	free(fir);
-	list_del(&bi);
 	list_del(&head);
 }
 
@@ -146,5 +173,4 @@ void	sort_a(t_stack *a, t_stack *b, t_buf *buf)
 		write(1, "rra\n", 4);
 		ft_rra(a);
 	}
-	// ft_check(a);
 }

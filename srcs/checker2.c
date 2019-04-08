@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 10:33:03 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 18:52:25 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:50:45 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,21 @@ void	duplicate(t_stack *a)
 		}
 		a = a->next;
 	}
-	if (a->prev == NULL)
-		exit(0);
+}
+
+void	free_array(char **arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+		ft_strdel(&arr[i++]);
 }
 
 void	ft_search(char *arr, t_stack *a)
 {
 	char	**s;
 	int		i;
-	int		j;
 	t_stack	*b;
 
 	b = NULL;
@@ -77,11 +83,6 @@ void	ft_search(char *arr, t_stack *a)
 		ft_strcmp(s[i], "pb") == 0 && a ? a = del(a->value, &a) : 0;
 		i++;
 	}
-	i = 0;
-	while (s[i])
-	{
-		ft_strdel(&s[i]);
-		i++;
-	}
+	free_array(s);
 	b ? ft_error() : ft_check(a);
 }

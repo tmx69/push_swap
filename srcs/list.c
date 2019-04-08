@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 10:35:09 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 21:27:30 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/06 13:19:53 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@
 
 void	ft_check(t_stack *sa)
 {
-	// t_stack	*help;
+	t_stack	*help;
 
 	while (sa->prev != NULL)
 	{
 		sa = sa->prev;
 	}
-	// help = sa;
-	// while (help->prev)
-	// 	help = help->prev;
-	// while (help != NULL)
-	// {
-	// 	printf("|%d|", help->value);
-	// 	help = help->next;
-	// }
-	// printf("\n");
+	help = sa;
+	while (help->prev)
+		help = help->prev;
+	while (help != NULL)
+	{
+		printf("|%d|", help->value);
+		help = help->next;
+	}
+	printf("\n");
 	while (sa->next != NULL)
 	{
 		if (sa->value > sa->next->value)
@@ -92,6 +92,8 @@ void	list_del(t_stack **alst)
 	t_stack *swap;
 
 	tmp = *alst;
+	if (tmp == NULL)
+		return ;
 	while (tmp)
 	{
 		swap = tmp->next;

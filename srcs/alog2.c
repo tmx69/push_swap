@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 17:28:49 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 21:56:06 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 10:05:33 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_buf	*min_max(t_buf *buf, t_stack *a)
 
 void	cpy_head_rra(t_stack *head, t_buf *buf, int bi)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	while (head)
 	{
@@ -45,7 +45,8 @@ void	cpy_head_rra(t_stack *head, t_buf *buf, int bi)
 		ft_rra(head);
 	}
 }
-int	ft_check_three(t_stack *sa)
+
+int		ft_check_three(t_stack *sa)
 {
 	while (sa->prev != NULL)
 	{
@@ -61,82 +62,38 @@ int	ft_check_three(t_stack *sa)
 	}
 	return (1);
 }
-void	alg(t_stack *a)
+
+void	cycle_three(t_stack *tmp, t_stack *a)
 {
-	int j;
-	t_stack *tmp;
-	int min;
-	int	max;
-	j = 0;
-
-	while(a->prev != NULL){
-		a = a->prev;
-	}
-	tmp = a;
-	while (a->next)
+	while (ft_check_three(a) == 0)
 	{
-		j++;
-		a = a->next;
-	}
-	// printf("%d", j);
-	if (j == 2)
-	{
-		if ((tmp->value > a->value  && tmp->value > tmp->next->value ) && tmp->next->value > a->value)
-		{
-			write(1, "sa\n", 4);
-			write(1, "rra\n", 4);
-			ft_sa(a);
-			ft_rra(a);
-		}
-		else if (tmp->value < a->value &&  tmp->value > tmp->next->value)
+		write(1, "rra\n", 4);
+		ft_rra(a);
+		if (tmp->value > tmp->next->value)
 		{
 			ft_sa(a);
-			write(1, "sa\n", 4);
+			write(1, "sa\n", 3);
 		}
-		else
-		{
-			while (ft_check_three(a) == 0)
-			{
-				write(1, "rra\n", 4);
-				ft_rra(a);
-				if (tmp->value > tmp->next->value)
-				{
-					ft_sa(a);
-					write(1, "sa\n", 4);
-				}
-			}
-		}
-		// ft_check(a);
-		exit (0);
 	}
-	while(a->prev != NULL){
-		a = a->prev;
-	}
-	if (j == 4)
+}
+
+void	alg_three(t_stack *a, t_stack *tmp)
+{
+	if ((tmp->value > a->value && tmp->value > tmp->next->value)
+			&& tmp->next->value > a->value)
 	{
-		while (ft_check_three(a) == 0)
-		{
-			tmp = a;
-			while (tmp->next != NULL)
-				tmp = tmp->next;
-			if (tmp->value > tmp->next->value)
-			{
-				ft_sa(a);
-				write(1, "sa\n", 4);
-			}
-			else if (tmp->value < tmp->next->value)
-			{
-				write(1, "rra\n", 4);
-				ft_rra(a);
-			}
-			else
-			{
-				write(1, "ra\n", 4);
-				ft_turn_ra(a);
-			}
-
-
-		}
+		write(1, "sa\n", 3);
+		ft_sa(a);
+		write(1, "rra\n", 4);
+		ft_rra(a);
 	}
-
+	else if (tmp->value < a->value && tmp->value > tmp->next->value)
+	{
+		ft_sa(a);
+		write(1, "sa\n", 3);
+	}
+	else
+	{
+		cycle_three(tmp, a);
+	}
 }

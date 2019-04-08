@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 16:44:22 by rywisozk          #+#    #+#             */
-/*   Updated: 2019/04/04 20:20:42 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:51:40 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	duplicates(t_stack *a)
 	{
 		a->prev->value > a->value ? write(1, "sa\n", 3) : 0;
 		a->prev->value > a->value ? ft_sa(a) : 0;
-		write(1, "ok", 2);
 		exit(0);
 	}
 	if (a->prev == NULL)
@@ -70,8 +69,7 @@ int	main(int ac, char **av)
 		}
 	}
 	duplicates(head);
-	alg(a);
-	srot(head);
+	alg(a) == 0 ? srot(head) : 0;
 	while (a->prev != NULL)
 		a = a->prev;
 	list_del(&a);

@@ -6,7 +6,7 @@
 /*   By: rywisozk <rywisozk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:56:40 by jritchie          #+#    #+#             */
-/*   Updated: 2019/04/04 20:47:30 by rywisozk         ###   ########.fr       */
+/*   Updated: 2019/04/08 09:58:34 by rywisozk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void				min_first_rbra(t_buf *buf, int *fir);
 void				cpy_head(t_stack *head, t_buf *buf, int bi);
 void				cpy_head_rra(t_stack *head, t_buf *buf, int bi);
 t_buf				*min_max(t_buf *buf, t_stack *a);
-void				alg(t_stack *a);
-int				ft_check_three(t_stack *sa);
+int					alg(t_stack *a);
+int					ft_check_three(t_stack *sa);
+void				alg_three(t_stack *a, t_stack *buf);
+void				last_oper(t_stack *a, t_stack *b);
+void				free_array(char **arr);
+void				lst_opr(t_stack *a, t_stack *b);
+void				cycle_three(t_stack *tmp, t_stack *a);
 #endif
